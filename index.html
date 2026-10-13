@@ -46,4 +46,25 @@ document.getElementById('addSong').addEventListener('click',()=>{const name=docu
 document.getElementById('joinVideo').addEventListener('click',()=>{let room=document.getElementById('roomName').value.trim().replace(/[^a-zA-Z0-9_-]/g,'-').slice(0,60);if(!room)room='PinoyTambayanFM';window.open('https://p2p.mirotalk.com/join/'+encodeURIComponent(room),'_blank','noopener,noreferrer')});
 document.getElementById('chatForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('chatName').value.trim()||'Guest',input=document.getElementById('chatMessage'),message=input.value.trim();if(!message)return;const p=document.createElement('p');p.className='msg';const b=document.createElement('b');b.textContent=name+': ';p.append(b,document.createTextNode(message));const log=document.getElementById('chatlog');log.appendChild(p);log.scrollTop=log.scrollHeight;input.value=''});
 </script>
+<section style="max-width:500px;margin:24px auto;padding:24px;background:#21133b;color:white;border-radius:18px;text-align:center;font-family:Arial,sans-serif">
+  <h2>📻 Pinoy Tambayan FM</h2>
+  <p>Ang inyong online radio!</p>
+  <audio id="radioPlayer" controls preload="none" style="width:100%">
+    Your browser does not support audio.
+  </audio>
+  <p id="radioStatus" style="font-size:14px">Handa nang makinig</p>
+</section>
+
+<script>
+const radioPlayer = document.getElementById("radioPlayer");
+const radioStatus = document.getElementById("radioStatus");
+
+radioPlayer.addEventListener("playing", function() {
+  radioStatus.textContent = "🔴 Live na tumutugtog";
+});
+
+radioPlayer.addEventListener("error", function() {
+  radioStatus.textContent = "Hindi makakonekta. Suriin ang audio stream URL.";
+});
+</script>
 </body></html>
